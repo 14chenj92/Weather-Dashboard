@@ -1,0 +1,37 @@
+
+.header {
+    background-color: blueviolet;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+body {
+    background-image: url(https://cdna.artstation.com/p/assets/images/images/017/663/252/original/anastasia-kozheko-normal.gif?1645074105);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btn {
+    background-color: #e7e7e7; 
+    color: black;
+    display: block;
+    padding: 5px 150px;
+    margin-left: 75px;
+}
+  
+.btn:hover {
+    background-color: plum; 
+    color: white;
+}
+
+.card {
+    background-color: lightskyblue; 
+}
+
+.container {
+    background-color: lightskyblue; 
+}
