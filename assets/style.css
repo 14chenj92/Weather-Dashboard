@@ -19,8 +19,6 @@ body {
     background-color: #e7e7e7; 
     color: black;
     display: block;
-    padding: 5px 150px;
-    margin-left: 75px;
 }
   
 .btn:hover {
@@ -34,4 +32,7 @@ body {
 
 .container {
     background-color: lightskyblue; 
+    display: flex;
+    flex-direction: row;
 }
+
