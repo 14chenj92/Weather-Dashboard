@@ -4,7 +4,9 @@ var searchbtn = $("#searchbutton");
 
 var historylist = [];
 
+var cityinput = "";
 
+cityinput = $("#searchinput").val();
 
 function currentweather() {
     // gets the data from open weather api to display the current weather
@@ -69,16 +71,30 @@ function currentweather() {
 }
 
 
-// saves the city search history and displays button on the previous location tab
-function savehistory() {
-        var cityinput = $("#searchinput").val();
-        if (historylist.includes(cityinput.value) === false) {
-            historylist.push(cityinput.value);
-    localStorage.setItem("city", historylist);
-    var searchedcity = $(`<button type="button" class="btn list-group-item id=lastbtn">${cityinput}</button></li>`);
-    $("#history").append(searchedcity);
-    } }
+// stores city info
+var savecity = () => {
+    localStorage.setItem('city' + localStorage.length, $("#searchinput").val());
+}
 
+// appends new searches to previous locations tab
+var pastcity = () => {
+    $('#history').empty();
+        let lastCityKey="city"+(localStorage.length-1);
+        lastCity=localStorage.getItem(lastCityKey);
+        for (let i = 0; i < localStorage.length; i++) {
+            let city = localStorage.getItem("city" + i);
+            var newcity;
+            if (cityinput===""){
+                cityinput=lastCity;
+            }
+            if (city === cityinput) {
+                newcity = `<button type="button" class="list-group-item list-group-item-action btn">${city}</button></li>`;
+            } else {
+                newcity = `<button type="button" class="list-group-item list-group-item-action btn">${city}</button></li>`;
+            } 
+            $('#history').append(newcity);
+        }
+}
 
 
 // sample url: https://api.openweathermap.org/data/2.5/forecast?lat=39.7392&lon=-104.9847&appid=9bd853fdb52d1e3a072cf6f27f45a6b6
@@ -89,6 +105,15 @@ searchbtn.on("click", (event) => {
     $("#currentweather").empty();
     $("#forecast").empty();
     currentweather();
-    savehistory();
+    savecity();
+    pastcity();
 })
 
+// displays forecast for the search history buttons
+$("#history").on("click", (event) => {
+    event.preventDefault();
+    nextcity=$("#history").val();
+    $("#currentweather").empty();
+    $("#forecast").empty();
+    currentweather(nextcity);
+})
